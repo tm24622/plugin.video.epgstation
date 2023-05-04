@@ -164,20 +164,21 @@ if __name__ == '__main__':
         rulename = rulenames[0] if len(rulenames) else u'ルールなし'
         
         thumbnail_url = urljoin(server_url, 'api/thumbnails/' + str(video['thumbnails'][0])) if len(video['thumbnails']) else ''
-        video_url = urljoin(server_url, 'api/videos/' + str(video['videoFiles'][0]['id']))
+        for vf in video['videoFiles']:
+            video_url = urljoin(server_url, 'api/videos/' + str(vf['id']))
 
-        # ルールID別にデータを格納。新規ルールはIDが1から振られるようなので、ルールなしは「0」としている
-        VIDEOS.setdefault(video.get('ruleId', 0), []).append({
-             'id': video['id'],
-             'name': video['name'],
-             'thumb': thumbnail_url,
-             'rulename': rulename,
-             'video': video_url,
-             'startAt': video['startAt'],
-             'endAt': video['endAt'],
-             'genre1': video.get('genre1'),
-             'genre2': video.get('genre2'),
-             'description': video.get('description',''),
-             'extended': video.get('extended','')})
+            # ルールID別にデータを格納。新規ルールはIDが1から振られるようなので、ルールなしは「0」としている
+            VIDEOS.setdefault(video.get('ruleId', 0), []).append({
+                 'id': vf['id'],
+                 'name': video['name'] + ' - ' + vf['name'],
+                 'thumb': thumbnail_url,
+                 'rulename': rulename,
+                 'video': video_url,
+                 'startAt': video['startAt'],
+                 'endAt': video['endAt'],
+                 'genre1': video.get('genre1'),
+                 'genre2': video.get('genre2'),
+                 'description': video.get('description',''),
+                 'extended': video.get('extended','')})
 
     router(sys.argv[2][1:])
