@@ -95,10 +95,9 @@ def list_videos(category):
 
         list_item.setProperty('IsPlayable', 'true')
 
-        # コメントは日本語だけと、メニューを英語にしてみたww
         list_item.addContextMenuItems([
-            ('Update', 'Container.Refresh'),
-            ('Delete', 'RunScript(%s/delete.py, %d, %s)' % (settings.getAddonInfo('path'), video['id'], video['name']))
+            ('更新', 'Container.Refresh'),
+            ('削除', 'RunScript(%s/delete.py, %d, %s)' % (settings.getAddonInfo('path'), video['id'], video['name']))
         ])
 
         url = get_url(action='play', video=video['video'])
