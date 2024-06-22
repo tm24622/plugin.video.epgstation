@@ -25,10 +25,11 @@ def get_categories():
 
 def get_categoryname(category):
     subdir_name = u'その他'
-        for x in rules:
-            if x['id'] == category:
-                if 'directory' in x['saveOption'].keys():
-                    subdir_name = x['saveOption']['directory']
+    for x in rules:
+        if x['id'] == category:
+            if 'directory' in x['saveOption'].keys():
+                subdir_name = x['saveOption']['directory']
+                break
     return subdir_name
 
 def get_videos(category):
@@ -168,6 +169,7 @@ if __name__ == '__main__':
             if x['id'] == video.get('ruleId'):
                 if 'directory' in x['saveOption'].keys():
                     subdir_name = x['saveOption']['directory']
+                    break
 
         thumbnail_url = urljoin(server_url, 'api/thumbnails/' + str(video['thumbnails'][0])) if len(video['thumbnails']) else ''
         for vf in video['videoFiles']:
