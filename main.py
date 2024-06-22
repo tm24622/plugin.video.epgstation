@@ -25,14 +25,11 @@ def get_categories():
 
 def get_categoryname(category):
     subdir_name = u'その他'
-    try:
-        for x in rules:
-            if x['id'] == category:
-                if 'directory' in x['saveOption'].keys():
-                    subdir_name = x['saveOption']['directory']
-                    break
-    except:
-        pass
+    for x in rules:
+        if x['id'] == category:
+            if 'directory' in x['saveOption'].keys():
+                subdir_name = x['saveOption']['directory']
+                break
     return subdir_name
 
 def get_videos(category):
@@ -168,15 +165,11 @@ if __name__ == '__main__':
     for video in videos:
         # フォルダ分けにサブディレクトリの名前を使用するため、名称を取得
         subdir_name = u'その他'
-        try:
-            for x in rules:
-                if x['id'] == video.get('ruleId'):
-                    if 'directory' in x['saveOption'].keys():
-                        subdir_name = x['saveOption']['directory']
-                        break
-        except:
-            pass
-        
+        for x in rules:
+            if x['id'] == video.get('ruleId'):
+                if 'directory' in x['saveOption'].keys():
+                    subdir_name = x['saveOption']['directory']
+                    break
         thumbnail_url = urljoin(server_url, 'api/thumbnails/' + str(video['thumbnails'][0])) if len(video['thumbnails']) else ''
         for vf in video['videoFiles']:
             video_url = urljoin(server_url, 'api/videos/' + str(vf['id']))
@@ -186,7 +179,7 @@ if __name__ == '__main__':
                  'id': vf['id'],
                  'name': video['name'] + ' - ' + vf['name'],
                  'thumb': thumbnail_url,
-                 'rulename': subdir_name,
+                 'subdir_name': subdir_name,
                  'video': video_url,
                  'startAt': video['startAt'],
                  'endAt': video['endAt'],
