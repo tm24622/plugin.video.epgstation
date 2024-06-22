@@ -24,7 +24,7 @@ def get_categories():
     return VIDEOS
 
 def get_categoryname(category):
-    names = [x['searchOption']['keyword'] for x in rules if x['id'] == category]
+    names = [x['searchOption']['channel'] for x in rules if x['id'] == category]
     return names[0] if len(names) else u'ルールなし'
 
 def get_videos(category):
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     VIDEOS={}
     for video in videos:
         # フォルダ分けにルール名を使用するため、ルールの名称を取得
-        rulenames = [x['searchOption']['keyword'] for x in rules if x['id'] == video.get('ruleId')]
+        rulenames = [x['searchOption']['channel'] for x in rules if x['id'] == video.get('ruleId')]
         rulename = rulenames[0] if len(rulenames) else u'ルールなし'
         
         thumbnail_url = urljoin(server_url, 'api/thumbnails/' + str(video['thumbnails'][0])) if len(video['thumbnails']) else ''
