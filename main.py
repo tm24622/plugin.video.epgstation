@@ -180,7 +180,7 @@ if __name__ == '__main__':
                  'id': vf['id'],
                  'name': video['name'] + ' - ' + vf['name'],
                  'thumb': thumbnail_url,
-                 'subdir_name': subdir_name,
+                 'rulename': subdir_name,
                  'video': video_url,
                  'startAt': video['startAt'],
                  'endAt': video['endAt'],
