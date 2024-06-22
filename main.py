@@ -160,7 +160,7 @@ if __name__ == '__main__':
     for video in videos:
         # フォルダ分けにルール名を使用するため、ルールの名称を取得
         rulenames = [x['saveOption']['directory'] for x in rules if x['id'] == video.get('ruleId')]
-        rulename = rulenames[1] if len(rulenames) else u'ルールなし'
+        rulename = rulenames[0] if len(rulenames) else u'ルールなし'
         
         thumbnail_url = urljoin(server_url, 'api/thumbnails/' + str(video['thumbnails'][0])) if len(video['thumbnails']) else ''
         for vf in video['videoFiles']:
